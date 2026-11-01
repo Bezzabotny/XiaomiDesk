@@ -12,12 +12,12 @@ class UISmoke {
   string testState=Path.Combine(args[0],"ui-settings-"+Guid.NewGuid().ToString("N")+".json");
   var startupStore=new MemoryStartupStore();
   using(var hub=new Hub(testState,startupStore)){
-   hub.Size=new Size(1240,860);hub.Show();Application.DoEvents();var show=typeof(Hub).GetMethod("ShowPage",BindingFlags.Instance|BindingFlags.NonPublic);
+   hub.Size=new Size(1040,760);hub.Show();Application.DoEvents();var show=typeof(Hub).GetMethod("ShowPage",BindingFlags.Instance|BindingFlags.NonPublic);
    var output=args.Length>0?args[0]:".";Directory.CreateDirectory(output);
    foreach(string page in new[]{"Галерея","Ссылки","Инструменты","Обзор","Подключение","Файлы","Передачи","Экран телефона","Камера","Уведомления","Буфер обмена","Звонки и SMS","Интернет","Настройки"}){
     show.Invoke(hub,new object[]{page});hub.PerformLayout();Application.DoEvents();
     var panel=(Panel)typeof(Hub).GetField("content",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(hub);var media=panel.Controls.OfType<StreamHost>().FirstOrDefault();if(media!=null&&media.Top<140)throw new Exception("Media covers its start/stop controls");
-    using(var bitmap=new Bitmap(hub.Width,hub.Height)){hub.DrawToBitmap(bitmap,new Rectangle(Point.Empty,hub.Size));bitmap.Save(Path.Combine(output,page+".png"));if(bitmap.GetPixel(40,250).ToArgb()==bitmap.GetPixel(1200,250).ToArgb())throw new Exception("Blank UI: controls not rendered");}
+    using(var bitmap=new Bitmap(hub.Width,hub.Height)){hub.DrawToBitmap(bitmap,new Rectangle(Point.Empty,hub.Size));bitmap.Save(Path.Combine(output,page+".png"));if(bitmap.GetPixel(40,250).ToArgb()==bitmap.GetPixel(bitmap.Width-40,250).ToArgb())throw new Exception("Blank UI: controls not rendered");}
     Console.WriteLine("PASS render "+page);
    }
    var flags=BindingFlags.Instance|BindingFlags.NonPublic;

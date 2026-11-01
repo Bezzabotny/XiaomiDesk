@@ -10,4 +10,4 @@ User requested direct preparation and polishing for GitHub. Retain native C#5/Ja
 
 Review focus: escaped paths outside repository; signing secrets/debug key accidentally shipped; stale gallery results affecting new page; CI secrets on pull requests; public release documentation promises beyond verified behavior.
 
-The candidate reuses the verified existing helper0.4, with unchanged Android source and no signing credential access. Embedded recording remains experimental. Hosted CI still needs a real GitHub run.
+The candidate reuses the verified existing helper0.4, with unchanged Android source and no signing credential access. Embedded recording remains experimental. Hosted Windows checks run on GitHub Actions.

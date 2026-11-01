@@ -1,0 +1,17 @@
+name: Ошибка
+description: Сообщить о проблеме XiaomiDesk
+body:
+  - type: textarea
+    id: versions
+    attributes:
+      label: Версии
+      description: XiaomiDesk, Windows, модель телефона, Android/HyperOS, Wi-Fi или USB
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Что произошло
+      description: Шаги, ожидаемый результат и фактическая ошибка. Удалите личные данные и адреса из журналов; не прикладывайте connection.json.
+    validations:
+      required: true
